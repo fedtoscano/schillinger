@@ -1,23 +1,24 @@
 
-def get_rhythmic_resultant(a: int, b: int): 
+def get_rhythmic_resultant_from_generators(*generators: int, cp: int): 
     """
-    This method creates an array of '0' (rests) and '1' (beats) for a monomial periodicity.
-    Then combines the two rhythmic patterns dropping the first resultant perpendicularly
+    This method creates arrays of '0' (rests) and '1' (beats) for multiple monomial periodicities.
+    Then combines all rhythmic patterns dropping them perpendicularly
     Args:
-        a (int) : major generator
-        b (int) : minor generator
+        *generators: variable number of integer generators
+        cp (int): common period
     Returns:
-        array: rhytmic resultants of the two periodicities
+        array: rhythmic resultant of all periodicities
     """
-    array_a = []
-    array_b = []
+    arrays = [generate_rhythm_str(gen, cp) for gen in generators]
+    return merge_rhythmical_strings(arrays);
 
-    for i in range(a * b):
-        array_a.append(1 if i % a == 0 else 0)
-        array_b.append(1 if i % b ==  0 else 0)
+def merge_rhythmical_strings(*rhythms):
+    return [1 if any(x == 1 for x in values) else 0 
+            for values in zip(*rhythms)]
 
-    return [1 if x == 1 or y == 1 else 0 for x, y in zip(array_a, array_b)]    
-
+def generate_rhythm_str(gen: int, cp: int):
+    return [int(i % gen == 0) for i in range(cp)]
+    
 def split_in_measures(cont: list, measure_length: int):
     """
     This method splits the given sequence of '0' and '1' into sub-arrays (eq. to bars), 
@@ -57,3 +58,18 @@ def replace_rests(sequence: list):
     
     return result
 
+def generate_fractioning_from_min_gen(a: int, b: int, indexes: list):
+    arr = []
+    max_len = a * a
+    rhythm_len = a * b
+
+    for index in indexes:
+        group = [0] * index if index != 0 else []
+        group[index:index] = generate_rhythm_str(b, rhythm_len)
+        
+        if len(group) > max_len: break
+
+        group += [0] * (max_len - len(group))  #adds '0' until end of sequence if needed
+        arr.append(group)
+
+    return arr
