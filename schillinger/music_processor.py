@@ -20,18 +20,20 @@ def dbl_bynary_sync(a: int, b: int, time_sig: str):
     """
     if b > a: return #todo handle the exception
     resultant = get_rhythmic_resultant_from_generators(a, b, cp = a * b)
+    print('resultant', resultant)
     bars = replace_rests(resultant)
+    print('bars', bars)
     generate_png(bars, time_sig)
 
 def dbl_fractioning(a: int, b: int, time_sig: str):
     maj_gen_str = generate_rhythm_str(a, a * a)
     b_indexes = [i for i, beat in enumerate(maj_gen_str) if beat == 1];
     b_groups = generate_fractioning_from_min_gen(a, b, b_indexes);
-    continuity = merge_rhythmical_strings(maj_gen_str, *b_groups);
+    continuity = merge_rhythmical_continuities(maj_gen_str, *b_groups);
     no_rests = replace_rests(continuity)
     generate_png(no_rests, time_sig)
 
 
-# dbl_bynary_sync(7, 3, '2/2')
-dbl_fractioning(4, 3, '4/4')
+dbl_bynary_sync(8, 5, '8/4')
+# dbl_fractioning(8, 5, '8/4')
 
