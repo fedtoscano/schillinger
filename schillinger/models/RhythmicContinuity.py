@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 from typing import List
-from music_processor import *
 
 @dataclass
 class RhythmicContinuity:
-    def bynary_sync(self, note):
-        return dbl_bynary_sync()
+    major_gen: int
+    minor_gen: List[int] 
+    time_sig = str
+    continuity = List[int] = None

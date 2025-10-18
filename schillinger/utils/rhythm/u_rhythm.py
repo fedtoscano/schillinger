@@ -1,4 +1,6 @@
-
+""" 
+This file contains low level utility methods for operating with Rhythm Continuities 
+"""
 def get_rhythmic_resultant_from_generators(*generators: int, cp: int): 
     """
     This method creates arrays of '0' (rests) and '1' (beats) for multiple monomial periodicities.
