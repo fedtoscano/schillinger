@@ -123,3 +123,10 @@ def generate_fractioning_from_min_gen(a: int, b: int, indexes: list):
         arr.append(group)
 
     return arr
+
+def revert_continuity(continuity: list):
+    """
+    Inverts the given continuity
+    """
+    return list(reversed(continuity))
+

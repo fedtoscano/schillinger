@@ -2,8 +2,8 @@ from music21.stream import Stream, Measure
 from music21.note import Note
 from music21 import environment
 from music21.meter import TimeSignature
-from utils.rhythm.u_rhythm import * 
-from render.render_rhythm import *
+from .utils.rhythm.u_rhythm import * 
+from .render.render_rhythm import *
 from functools import reduce
 from operator import mul
 
@@ -12,7 +12,7 @@ us['musescoreDirectPNGPath'] = r"C:\Program Files\MuseScore 4\bin\MuseScore4.exe
 
 def bynary_sync(a: int, b: int, time_sig: str):
     """
-    This method takes two generators (a, b) and opens a .pgn file that contains the
+    This method takes two generators (a, b) and opens a .png file that contains the
     rhythmical interference of the two
     Args:
         a (int): major generator
@@ -37,11 +37,14 @@ def multiple_sync(generators: list, time_sig: str):
     gen_resultant = get_rhythmic_resultant_from_generators(*generators, cp = cp)
     cfactors_resultant = get_rhythmic_resultant_from_generators(*complementary_factors, cp = cp)
 
+    gen_bars = replace_rests(gen_resultant)
+    cfactors_bars = replace_rests(cfactors_resultant)
+
+    generate_png(gen_bars, time_sig)
+    generate_png(cfactors_bars, time_sig)
+
     print(gen_resultant)
     print(cfactors_resultant)
-
-
-
 
 def fractioning(a: int, b: int, time_sig: str):
     """
