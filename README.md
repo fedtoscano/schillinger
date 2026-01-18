@@ -1,0 +1,172 @@
+# Schillinger System - Advanced Music Composition Tool
+
+A modern, DDD-based music composition tool implementing Joseph Schillinger's theory of rhythm generation using clean architecture principles.
+
+## 🎯 **Overview**
+
+This application provides advanced rhythm generation capabilities based on Schillinger's mathematical theory of music composition. It features a clean, layered architecture that separates domain logic from infrastructure concerns, making it highly maintainable and extensible.
+
+## 🏗️ **Architecture**
+
+The application follows **Domain-Driven Design (DDD)** and **Clean Architecture** principles:
+
+```
+src/schillinger/
+├── 📁 domain/           # 🧠 Business Logic (Pure, Testable)
+│   ├── rhythm/          # Rhythm generation subdomain
+│   └── composition/     # Composition management subdomain
+├── 📁 application/      # 🏗️ Use Cases (Orchestration)
+│   ├── dto/             # Data Transfer Objects
+│   └── use_cases/       # Application Services
+├── 📁 infrastructure/   # 🔧 External Concerns
+│   ├── config/          # Configuration management
+│   ├── external/        # External service adapters
+│   └── persistence/     # Data storage adapters
+├── 📁 presentation/     # 🎨 User Interface
+│   ├── views/           # UI components
+│   └── view_models/     # UI state management
+└── 📁 shared/           # 🔄 Cross-cutting concerns
+    └── kernel/          # Shared domain concepts
+```
+
+## ✨ **Features**
+
+### **Rhythm Generation**
+- **Binary Synchronization**: Generate rhythmic resultants from two generators
+- **Double Fractioning**: Create rhythmic continuities with fractional subdivisions
+- **Visual Output**: Renders rhythms as musical notation (PNG images)
+- **Time Signature Support**: Configurable time signatures (4/4, 3/4, 6/8, etc.)
+
+### **Architecture Features**
+- **Domain-Driven Design**: Pure domain logic separated from infrastructure
+- **Dependency Injection**: Clean dependency management
+- **Testable Design**: Each layer can be tested independently
+- **Extensible**: Easy to add new rhythm types, renderers, and storage backends
+
+## 🚀 **Quick Start**
+
+### **Prerequisites**
+- Python 3.9+
+- LilyPond (for music notation rendering)
+
+### **Installation**
+
+1. **Clone and setup:**
+   ```bash
+   git clone <repository>
+   cd schillinger-system
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run the application:**
+   ```bash
+   python main.py
+   # or
+   make run
+   ```
+
+## 📋 **Usage**
+
+1. **Launch**: `python main.py` or `make run`
+2. **Select Generators**: Choose major (A) and minor (B) generator values
+3. **Choose Rhythm Type**: Binary synchronization or double fractioning
+4. **Set Time Signature**: Select from available options (4/4, 3/4, etc.)
+5. **Generate**: Click the generate button to create and display the rhythm
+
+## 🛠️ **Development**
+
+### **Setup Development Environment**
+```bash
+make install-dev    # Install with development dependencies
+make setup-dev      # Setup pre-commit hooks
+```
+
+### **Code Quality**
+```bash
+make lint          # Run linting and type checking
+make format        # Format code
+make test          # Run tests with coverage
+make ci           # Run full CI pipeline
+```
+
+### **Project Structure Details**
+
+#### **Domain Layer** (`src/schillinger/domain/`)
+- **Pure business logic** with no external dependencies
+- **Entities**: `Generator`, `RhythmPattern`, `Composition`
+- **Value Objects**: `TimeSignature`, `RhythmSequence`
+- **Domain Services**: `RhythmGenerator` (core rhythm algorithms)
+
+#### **Application Layer** (`src/schillinger/application/`)
+- **Use Cases**: Orchestrate domain logic for specific user goals
+- **DTOs**: Request/response objects for clean API boundaries
+- **Application Services**: Coordinate between domain and infrastructure
+
+#### **Infrastructure Layer** (`src/schillinger/infrastructure/`)
+- **External Adapters**: Music21 renderer, file storage, UI services
+- **Configuration**: Environment-specific settings
+- **Dependency Injection**: Clean component wiring
+
+#### **Presentation Layer** (`src/schillinger/presentation/`)
+- **UI Components**: Clean separation from business logic
+- **View Models**: UI state management
+- **Controllers**: Thin layer delegating to use cases
+
+## 🧪 **Testing**
+
+The application includes comprehensive testing:
+
+```bash
+# Run all tests
+make test
+
+# Run specific test types
+make test-unit        # Unit tests only
+make test-integration # Integration tests only
+make test-e2e         # End-to-end tests only
+```
+
+### **Test Structure**
+- **Unit Tests**: Test domain logic and individual components
+- **Integration Tests**: Test layer interactions
+- **E2E Tests**: Test complete user workflows
+
+## 🔧 **Configuration**
+
+The application uses environment-specific configuration:
+
+- `config/development.yaml` - Development settings
+- `config/production.yaml` - Production settings
+- `config/test.yaml` - Test environment settings
+
+## 🎼 **Schillinger Theory Background**
+
+Joseph Schillinger's system uses mathematical principles to generate musical structures. This implementation focuses on rhythmic generation through:
+
+- **Generators**: Numbers that define periodic patterns
+- **Resultants**: Combined rhythmic patterns from multiple generators
+- **Synchronization**: Aligning different rhythmic cycles
+- **Fractioning**: Creating subdivisions within rhythmic patterns
+
+## 🤝 **Contributing**
+
+1. Follow the established architecture patterns
+2. Add tests for new features
+3. Use `make lint` and `make format` before committing
+4. Update documentation for architectural changes
+
+## 📄 **License**
+
+[Add license information here]
+
+## 🙏 **Acknowledgments**
+
+- Joseph Schillinger for his groundbreaking work in mathematical music composition
+- The music21 library for music notation capabilities
+- Clean Architecture and DDD communities for architectural guidance

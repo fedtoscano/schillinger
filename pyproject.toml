@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "schillinger-system"
+version = "0.1.0"
+description = "Advanced music composition tool using Schillinger theory"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "music21>=9.0.0",
+    "pillow>=10.0.0",
+    "pyyaml>=6.0",
+    "dependency-injector>=4.40.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov",
+    "black",
+    "flake8",
+    "mypy",
+    "pre-commit",
+]
+gui = ["tkinter"]  # Platform-specific
+
+[project.scripts]
+schillinger = "schillinger.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+schillinger = ["**/*.yaml", "**/*.yml"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "--cov=schillinger --cov-report=html --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["src/schillinger"]
+omit = ["*/tests/*", "*/infrastructure/external/*"]
